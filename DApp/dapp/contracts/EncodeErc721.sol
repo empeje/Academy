@@ -23,7 +23,7 @@ contract Encode is ERC721, ERC721URIStorage, Ownable {
         nfts[to].push(tokenId);
     }
 
-      function getNfts(address tokenOwner)
+    function getNfts(address tokenOwner)
         public
         view
         returns (uint256[] memory)
@@ -38,13 +38,16 @@ contract Encode is ERC721, ERC721URIStorage, Ownable {
     ) public {
         transferFrom(from, to, tokenId);
         // Correct for zero-indexed array
-        uint _index = tokenId-1;
+        uint256 _index = tokenId - 1;
         nfts[to].push(nfts[from][_index]);
-        nfts[from][_index] =0;
-        // What happens if you swap the two previous commands around?        
+        nfts[from][_index] = 0;
+        // What happens if you swap the two previous commands around?
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId)
+        internal
+        override(ERC721, ERC721URIStorage)
+    {
         super._burn(tokenId);
     }
 

@@ -3,7 +3,7 @@ const IPFS = require('ipfs');
 (async () => {
   const node = await IPFS.create();
 
-  const data = 'Hello, <YOUR NAME HERE>';
+  const data = 'Hello, <YOUR NAME HER>';
 
   const cid = await node.add(data);
 

@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <title>Web3 Gateway</title>
+
+    <link rel="icon" href="./images/www.codecademy.com.ico" type="image/x-icon">
+
+    <!-- External libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://bundle.run/buffer@6.0.3"></script>
+    
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+  
+    <!-- Local functions -->
+    <script src='./javascript/app.js'></script>
+    
+</head>
+
+<body>
+    <p>0xA287F2827342B88AE6f9016fC44e0dD6a246C0b5</p>
+    <p>0xEC2203Ee5e0Ee21A5D5036664B82e4fb215eb2B2</p>
+    <div id='header'>
+        <h1>Web3 gateway</h1>
+    </div>
+    <div id='output'>
+        <p>Output from application:</p>
+        <textarea placeholder="Awaiting response..." name="output-text" id="output-text" cols="80" rows="1"
+            readonly=true></textarea>
+    </div>
+  
+    <div id='nft'>
+        <h2>NFT</h2>
+        <p>Enter NFT details:</p>
+        <input placeholder="Public key" id="owner-input" size='50'></input>
+        <br />
+        <input placeholder="URI" id="uri-input" size='50'></input>
+        <br />
+        <button id="mint-nft" type="button">Mint NFT</button>
+        <br />
+        <button id="get-nfts" type="button">Get NFTs</button>
+        <br />
+        <p>Transfer NFT:</p>
+        <input placeholder="From" id="tx-from" size='50'></input>
+        <input placeholder="To" id="tx-to" size='50'></input>
+        <br />
+        <input placeholder="Token ID" id="token-id" size='5'></input>
+        <button id="tx-nft" type="button">Transfer NFT</button>
+    </div>
+</body>
+
+</html>
