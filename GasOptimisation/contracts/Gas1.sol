@@ -26,8 +26,8 @@ contract GasContract is Ownable, Constants {
 
     mapping(address => uint256) public balances;
     mapping(address => Payment[]) public payments;
-    History[] public paymentHistory; // when a payment was updated
     mapping(address => uint256) public whitelist;
+    mapping(address => History[]) public paymentHistory;
 
     struct Payment {
         uint256 paymentID;
@@ -41,7 +41,6 @@ contract GasContract is Ownable, Constants {
 
     struct History {
         uint256 lastUpdate;
-        address updatedBy;
         uint256 blockNumber;
     }
 
@@ -94,11 +93,11 @@ contract GasContract is Ownable, Constants {
         }
     }
 
-    function getPaymentHistory()
+    function getPaymentHistory(address user)
         public
         returns (History[] memory paymentHistory_)
     {
-        return paymentHistory;
+        return paymentHistory[user];
     }
 
     function checkForAdmin(address _user) public view returns (bool admin_) {
@@ -133,8 +132,7 @@ contract GasContract is Ownable, Constants {
         History memory history;
         history.blockNumber = block.number;
         history.lastUpdate = block.timestamp;
-        history.updatedBy = _updateAddress;
-        paymentHistory.push(history);
+        paymentHistory[_updateAddress].push(history);
         bool[] memory status = new bool[](tradePercent);
         for (uint256 i = 0; i < tradePercent; i++) {
             status[i] = true;
@@ -233,13 +231,10 @@ contract GasContract is Ownable, Constants {
         );
         whitelist[_userAddrs] = _tier;
         if (_tier > 3) {
-            whitelist[_userAddrs] -= _tier;
             whitelist[_userAddrs] = 3;
         } else if (_tier == 1) {
-            whitelist[_userAddrs] -= _tier;
             whitelist[_userAddrs] = 1;
         } else if (_tier > 0 && _tier < 3) {
-            whitelist[_userAddrs] -= _tier;
             whitelist[_userAddrs] = 2;
         }
 
